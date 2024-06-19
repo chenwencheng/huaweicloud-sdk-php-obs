@@ -430,10 +430,9 @@ trait SendRequestTrait
         $policyString = rtrim(implode('', $policy), ',');
         $policy = [$policyString];
 
-        $policy[] = '}';
+        $policy[] = ']}';
 
         $originPolicy = implode('', $policy);
-        var_dump($originPolicy);
 
         $policy = base64_encode($originPolicy);
 
