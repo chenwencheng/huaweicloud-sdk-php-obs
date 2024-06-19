@@ -414,9 +414,26 @@ trait SendRequestTrait
             $policy[] = '["starts-with", "$key", ""],';
         }
 
-        $policy[] = ']}';
+        $policyString = rtrim(implode('', $policy), ',');
+        $policy = [$policyString];
+        $policy[] = '],';
+
+        if (isset($args['Callback']) && is_array($args['Callback'])) {
+            $allowedCallbackKeys = ['url', 'host', 'body', 'body-type'];
+            $policy[] = '"callback":[';
+            foreach ($args['Callback'] as $key => $val) {
+                if (in_array($key, $allowedCallbackKeys)) {
+                    $policy[] = '{"' . $key . '":"' . $val . '"},';
+                }
+            }
+        }
+        $policyString = rtrim(implode('', $policy), ',');
+        $policy = [$policyString];
+
+        $policy[] = '}';
 
         $originPolicy = implode('', $policy);
+        var_dump($originPolicy);
 
         $policy = base64_encode($originPolicy);
 

@@ -1,5 +1,5 @@
 {
-	"name" : "zing/esdk-obs-php",
+	"name" : "qifei/esdk-obs-php",
 	"description" : "OBS PHP SDK",
 	"license":"Apache-2.0",
 	"require" : {
